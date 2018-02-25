@@ -1,7 +1,13 @@
 var Client = require('castv2-client').Client;
 var DefaultMediaReceiver = require('castv2-client').DefaultMediaReceiver;
 var mdns = require('mdns');
+
 var browser = mdns.createBrowser(mdns.tcp('googlecast'));
+browser.defaultResolverSequence = [
+  rst.DNSServiceResolve(), 'DNSServiceGetAddrInfo' in dns_sd ? rst.DNSServiceGetAddrInfo() : rst.getaddrinfo({families:[4]})
+, rst.makeAddressesUnique()
+];
+
 var deviceAddress;
 var language;
 
